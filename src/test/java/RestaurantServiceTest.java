@@ -77,5 +77,13 @@ class RestaurantServiceTest {
   }
   // <<<<<<<<<<<<<<<<<<<<ADMIN: ADDING & REMOVING RESTAURANTS>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-
+  //TDD
+  @Test
+  public void get_total_price_should_return_sum_of_all_items_price() {
+    List<String> items = new ArrayList<>();
+    items.add("Sweet corn soup");
+    items.add("Vegetable lasagne");
+    int totalPrice = service.getTotalPrice(items);
+    assertEquals(119+269, totalPrice);
+  }
 }

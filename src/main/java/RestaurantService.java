@@ -34,6 +34,13 @@ public class RestaurantService {
         return restaurants;
     }
 
+    // TDD SOLUTION
+    public int getTotalPrice( List<String> itemNames) {
+        int sum = 0;
+
+        return sum;
+    }
+
 
 
 }
