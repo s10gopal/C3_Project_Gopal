@@ -1,4 +1,5 @@
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
@@ -11,12 +12,13 @@ class RestaurantTest {
   Restaurant restaurant;
 
   // REFACTOR ALL THE REPEATED LINES OF CODE
+  @Mock
+  Restaurant mock = new Restaurant("Amelie's cafe", "Chennai",
+          LocalTime.parse("10:30:00"), LocalTime.parse("22:00:00"));
 
   public void setupData() {
 
-    LocalTime openingTime = LocalTime.parse("10:30:00");
-    LocalTime closingTime = LocalTime.parse("22:00:00");
-    restaurant = new Restaurant("Amelie's cafe", "Chennai", openingTime, closingTime);
+    restaurant = new Restaurant("Amelie's cafe", "Chennai", LocalTime.parse("10:30:00"), LocalTime.parse("22:00:00"));
     restaurant.addToMenu("Sweet corn soup", 119);
     restaurant.addToMenu("Vegetable lasagne", 269);
 
@@ -28,15 +30,15 @@ class RestaurantTest {
   @Test
   public void is_restaurant_open_should_return_true_if_time_is_between_opening_and_closing_time() {
     setupData();
-    Mockito.when(restaurant.getCurrentTime()).thenReturn(LocalTime.parse("11:00:00"));
-    assertTrue(restaurant.isRestaurantOpen());
+    Mockito.when(mock.getCurrentTime()).thenReturn(LocalTime.parse("10:00:00"));
+    assertTrue(!mock.isRestaurantOpen());
   }
 
   @Test
   public void is_restaurant_open_should_return_false_if_time_is_outside_opening_and_closing_time() {
     setupData();
-    Mockito.when(restaurant.getCurrentTime()).thenReturn(LocalTime.parse("09:00:00"));
-    assertFalse(restaurant.isRestaurantOpen());
+    Mockito.when(mock.getCurrentTime()).thenReturn(LocalTime.parse("12:00:00"));
+    assertFalse(mock.isRestaurantOpen());
   }
 
   // <<<<<<<<<<<<<<<<<<<<<<<<<OPEN/CLOSED>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
