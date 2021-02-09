@@ -65,4 +65,10 @@ public class Restaurant {
         return name;
     }
 
+  // TDD SOLUTION
+  public int getTotalPrice(List<String> itemNames) {
+    int sum = 0;
+    return sum;
+        }
+
 }
